@@ -26,6 +26,14 @@ export const metadata: Metadata = {
   description: "Listens for voice prompts and generated the recipe for user.",
 };
 
+/**
+ * Root layout component that provides Clerk authentication context, sets the document language,
+ * and applies the global font CSS variables before rendering application content.
+ *
+ * @param children - The React nodes to render inside the layout's body.
+ * @returns The root HTML structure wrapped with ClerkProvider, containing an `html` (lang="en")
+ * and a `body` that applies the configured font CSS variables.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
