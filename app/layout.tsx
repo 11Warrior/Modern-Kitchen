@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, El_Messiri } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import {
@@ -10,19 +10,11 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
-import Navbar from "@/components/LandingPage/Navbar";
-import { Variable } from "lucide-react";
-import SmoothScroll from "@/components/LenisComponent/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
-const elMessiri = El_Messiri({
-  variable: "--font-el-messiri",
-  subsets: ["latin"]
-})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -43,14 +35,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${elMessiri.variable} antialiased dark`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <Navbar />
-          <SmoothScroll>
-            <main>
-              {children}
-            </main>
-          </SmoothScroll>
+          {children}
         </body>
       </html>
     </ClerkProvider>
