@@ -12,7 +12,7 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
-
+//making the schema
 //Users, Chef and Meetings
 
 model Client {
