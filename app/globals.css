@@ -175,11 +175,24 @@ body {
   letter-spacing: var(--tracking-normal);
 }
 
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.card {
+  position: absolute;
+  left: 52%;
+  will-change: transform;
 }
