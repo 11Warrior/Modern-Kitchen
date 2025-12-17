@@ -18,4 +18,5 @@ export async function getMeetings() {
     } catch (error : any) {
         throw new Error("Failed to get meetings", error);
     }
+    //to be added in admin page.
 }
