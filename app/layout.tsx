@@ -13,6 +13,7 @@ import {
 import Navbar from "@/components/LandingPage/Navbar";
 import { Variable } from "lucide-react";
 import SmoothScroll from "@/components/LenisComponent/SmoothScroll";
+import TanStackProvider from "./TanStackProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,19 +41,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${elMessiri.variable} antialiased dark`}
-        >
-          <Navbar />
-          <SmoothScroll>
-            <main>
-              {children}
-            </main>
-          </SmoothScroll>
-        </body>
-      </html>
-    </ClerkProvider>
+    <TanStackProvider>
+      <ClerkProvider appearance={{
+        variables: {
+          colorPrimary: 'var(--primary)',
+          colorBackground: 'var(--background)/5',
+          colorText: 'white',
+          colorInputBackground: 'white'
+
+        }
+      }}>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${elMessiri.variable} antialiased dark`}
+          >
+            <Navbar />
+            <SmoothScroll>
+              <main>
+                {children}
+              </main>
+            </SmoothScroll>
+          </body>
+        </html>
+      </ClerkProvider>
+    </TanStackProvider>
   );
 }

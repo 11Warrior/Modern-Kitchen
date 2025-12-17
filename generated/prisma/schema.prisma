@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["driverAdapters"]
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -17,14 +17,14 @@ datasource db {
 //Users, Chef and Meetings
 
 model Client {
-  id          String    @id   @default(cuid())
-  clerkId     String    @unique
-  email       String?    @unique
-  FirstName   String? 
-  LastName    String?
-  phone       String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String   @unique
+  FirstName String?
+  LastName  String?
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   meetings Meeting[]
 
@@ -33,18 +33,16 @@ model Client {
 
 model Chef {
   id           String   @id @default(cuid())
-  // clerkId      String   @unique
+  clerkId      String   @unique
   email        String   @unique
   name         String?
   profileImage String
   phone        String?
   gender       Gender
-  bio          String?
+  bio          String
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
-  speciality String @default("Continental")
 
   meetings Meeting[]
 
@@ -58,13 +56,8 @@ model Meeting {
   duration Int      @default(40)
   notes    String?
 
-  status String @default("CONFIRMED")
-
   clientId String
   chefId   String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
   chef   Chef   @relation(fields: [chefId], references: [id], onDelete: Cascade)
