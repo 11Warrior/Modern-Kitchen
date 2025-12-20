@@ -45,8 +45,8 @@ export default function RootLayout({
       <ClerkProvider appearance={{
         variables: {
           colorPrimary: 'var(--primary)',
-          colorBackground: 'var(--background)/5',
-          colorText: 'white',
+          colorBackground: 'var(--chart-5)',
+          colorText: 'black',
           colorInputBackground: 'white'
 
         }
