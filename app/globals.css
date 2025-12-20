@@ -203,10 +203,15 @@ body {
   }
 }
 
-
-
 .card {
   position: absolute;
   left: 52%;
   will-change: transform;
+}
+
+
+.background-golden{
+  background: url('/glitterbg.jpg');
+  background-clip: text;
+  color: transparent;
 }
