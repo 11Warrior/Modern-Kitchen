@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "avatar.iran.liara.run",
         pathname: "/public/**"
+      },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
       }
     ]
   }

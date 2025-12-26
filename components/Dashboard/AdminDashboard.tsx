@@ -41,7 +41,11 @@ const AdminDashboard = () => {
       <div className='w-full px-20 py-10 h-[40vh] overflow-hidden'>
         <div className='bg-primary/60 rounded-lg w-full h-full px-5 py-10 flex items-center justify-between'>
           <div className='flex flex-col space-y-4'>
-            <div className='text-accent-foreground rounded-full bg-amber-400/10 p-3 flex gap-2 justify-center items-center  '> <div className='size-1.5 bg-amber-700 rounded-full animate-pulse'></div><span className='w-full text-[1vw]'>Admin Dashboard</span></div>
+            <div className='text-accent-foreground rounded-full bg-amber-400/10 p-3 flex gap-2 items-center w-[10vw]  '>
+              <div className='size-2 bg-amber-700 rounded-full animate-pulse'>
+              </div>
+              <span className='text-[1vw]'>Admin Dashboard</span>
+            </div>
 
             <div>
               <h1 className='text-5xl'>Welcome Back ! {admin?.user?.fullName}</h1>
@@ -72,7 +76,7 @@ const AdminDashboard = () => {
           <ChefManagementPanel />
         </div>
       </div>
-      
+
       {/**Meeting records in dashboard to be done */}
 
     </section>

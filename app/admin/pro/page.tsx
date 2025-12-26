@@ -1,16 +1,13 @@
 import Navbar from '@/components/Navbar/Navbar'
 import { PricingTable } from '@clerk/nextjs';
-import { currentUser } from '@clerk/nextjs/server'
 import { CrownIcon } from 'lucide-react';
-import React from 'react'
 
 const Pro = async () => {
-  const user = await currentUser();
   return (
     <>
       <Navbar />
       <section className='min-h-screen px-20 pt-10 '>
-        <div className='w-full h-[30vh] bg-linear-to-br from-primary via-primary/80 rounded-lg p-7'>
+        <div className='w-full h-[30vh] bg-linear-to-br from-primary/80 to-primary/10   rounded-lg p-7'>
 
           <div className='h-full  flex justify-between'>
 
@@ -27,14 +24,13 @@ const Pro = async () => {
             </div>
 
             <div className=' right flex items-center justify-end'>
-              <div className=' size-60 p-8 rounded-full bg-linear-to-br to-primary-500/65 from-yellow-200/55  flex items-center justify-center border border-black'>
-                <CrownIcon size={"100%"} fill='yellow' color='black' />
+              <div className=' size-46 p-8 rounded-full bg-primary/30 flex items-center justify-center border border-black'>
+                <CrownIcon size={"100%"}  color='#7033ff' />
               </div>
             </div>
 
           </div>
         </div>
-
 
         <div>
           <div className='flex items-center justify-center '>
@@ -45,12 +41,11 @@ const Pro = async () => {
           </div>
 
           <div className='mt-20'>
-            <PricingTable appearance={{variables: {colorBackground: 'white' }}} />
+            <PricingTable appearance={{ variables: { colorBackground: 'white' } }} newSubscriptionRedirectUrl='/admin/pro' />
           </div>
-
         </div>
-      </section>
 
+      </section>
     </>
   )
 }
