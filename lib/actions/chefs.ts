@@ -6,6 +6,14 @@ import { prisma } from "../prisma";
 import { generateProfile } from "../utils";
 import { revalidatePath } from "next/cache";
 
+type chefInputType = {
+    name: string,
+    email: string,
+    phone: string,
+    gender: Gender,
+    speciality: string,
+    isActive: boolean,
+}
 
 export async function getChefs() {
     try {
@@ -21,34 +29,25 @@ export async function getChefs() {
             meetingCount: chef._count.meetings
         }))
 
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error("Failed to get Chefs", error);
     }
 }
 
-type chefInputType = {
-  name : string,
-  email : string,
-  phone : string,
-  gender : Gender,       
-  speciality : string,
-  isActive : boolean,
-}
-
-export async function addChefs(input : chefInputType) {
+export async function addChefs(input: chefInputType) {
     try {
         if (!input) return Error("Cannot create doctor from empty input");
         const addedChef = await prisma.chef.create({
             data: {
                 ...input,
                 profileImage: generateProfile(input.name, input.gender),
-                
+
             }
         })
-       //new chef making process
-       revalidatePath('/admin/dashboard');
-       return addedChef;
-    } catch (error : any) {
+        //new chef making process
+        revalidatePath('/admin/dashboard');
+        return addedChef;
+    } catch (error: any) {
         console.log("Prisma error ", error?.message);
         throw error;
     }
@@ -57,9 +56,9 @@ export async function addChefs(input : chefInputType) {
 export async function updateChef(input: chefInputType) {
     try {
         if (!input) return Error("Cannot update Chef");
-        const {email, ...updatedData}= input;
+        const { email, ...updatedData } = input;
         const updatedChef = await prisma.chef.update({
-            where: {email},
+            where: { email },
             data: {
                 ...updatedData,
                 profileImage: generateProfile(input.name, input.gender)
@@ -68,7 +67,7 @@ export async function updateChef(input: chefInputType) {
 
         revalidatePath('/admin/dashboard');
         return updatedChef;
-    } catch (error : any) {
+    } catch (error: any) {
         console.log("Error in updating chef", error);
         throw error;
     }
