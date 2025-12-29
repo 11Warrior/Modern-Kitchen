@@ -1,20 +1,33 @@
 "use client"
-import { getMeetings, getMeetingStats, getUserMeetings } from "@/lib/actions/meetings";
-import { useQuery } from "@tanstack/react-query";
+
+import { getAvailableChefs } from "@/lib/actions/chefs";
+import {  getBookedMeetingTime, getMeetings, getMeetingStats, getUserMeetings } from "@/lib/actions/meetings";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { error } from "console";
+import { json } from "stream/consumers";
 
 
 export function useGetMeetings() {
-    const result = useQuery({
-        queryKey: ["getMeetings"],
-        queryFn: getMeetings,
-    })
-    return result;
+  const result = useQuery({
+    queryKey: ["getMeetings"],
+    queryFn: getMeetings,
+  })
+  return result;
+}
+
+export function useGetAvailableChefs() {
+  const result = useQuery({
+    queryKey: ["availableChefs"],
+    queryFn: getAvailableChefs,
+  })
+
+  return result;
 }
 
 export function useGetMeetingStats() {
   const result = useQuery({
     queryKey: ["meetingStats"],
-    queryFn: getMeetingStats, 
+    queryFn: getMeetingStats,
   })
 
   return result;
@@ -23,7 +36,56 @@ export function useGetMeetingStats() {
 export function useGetUserMeeting() {
   const result = useQuery({
     queryKey: ["userMeetings"],
-    queryFn: getUserMeetings, 
+    queryFn: getUserMeetings,
+  })
+
+  return result;
+}
+
+export function useGetBookedMeetingTime(chefId: string, date: string) {
+  const result = useQuery({
+    queryKey: ["bookedMeetingTime"],
+    queryFn: () => getBookedMeetingTime(chefId, date),
+    enabled: !!chefId && !!date
+  })
+
+  return result;
+}
+
+export type MeetingInput = {
+    chefId: string,
+    date: string,
+    notes?: string,
+    time: string,
+}
+
+
+export function useAddMeeting() {
+  const result = useMutation({
+    mutationKey: ['addMeeting'],
+    mutationFn: async (input: MeetingInput) => {
+      try {
+        const res = await fetch('/api/meetings',
+          {
+            method: 'POST',
+            body: JSON.stringify(input),
+            headers: { 'content-type': 'application/json' }
+          }
+        )
+        
+        const addedMeeting = await res.json();
+        return  addedMeeting;
+
+      } catch (error: Error | any) {
+        throw new Error("Error calling api/meetings for adding meeting", error?.messsage);
+      }
+    },
+    onSuccess: () => {
+      console.log("Sucessfully created meeting");
+    },
+    onError: (error) => {
+      console.log("Error while calling meeting backend api", error?.message);
+    }
   })
 
   return result;

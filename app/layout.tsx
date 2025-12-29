@@ -14,6 +14,7 @@ import Navbar from "@/components/LandingPage/Navbar";
 import { Variable } from "lucide-react";
 import SmoothScroll from "@/components/LenisComponent/SmoothScroll";
 import TanStackProvider from "./TanStackProvider";
+import { ReduxProvider } from "@/redux/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,9 +58,11 @@ export default function RootLayout({
           >
             <Navbar />
             <SmoothScroll>
-              <main>
-                {children}
-              </main>
+              <ReduxProvider>
+                <main>
+                  {children}
+                </main>
+              </ReduxProvider>
             </SmoothScroll>
           </body>
         </html>
