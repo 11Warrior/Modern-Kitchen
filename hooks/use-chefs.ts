@@ -1,5 +1,5 @@
 "use client"
-import { addChefs, getChefs, updateChef } from "@/lib/actions/chefs";
+import { addChefs, getChefById, getChefs, updateChef } from "@/lib/actions/chefs";
 import { Gender } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -9,6 +9,15 @@ export function useGetChefs() {
         queryFn: getChefs
     })
     return chefs;
+}
+
+export function useGetChefById(chefId: string) {
+    const result = useQuery({
+        queryKey: ['chefById'],
+        queryFn:() => getChefById(chefId),
+        enabled: !!chefId
+    })
+    return result;
 }
 
 export function useAddChefs() {
@@ -25,7 +34,6 @@ export function useAddChefs() {
 
     return chef;
 }
-
 
 export function useUpdateChefs() {
     const queryClient = useQueryClient();

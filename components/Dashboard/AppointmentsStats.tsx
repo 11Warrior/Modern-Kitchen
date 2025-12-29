@@ -20,7 +20,7 @@ const AppointmentsStats = () => {
     // console.log(meetingStats);
 
     const { data: userMeetings } = useGetUserMeeting();
-    // console.log(userMeetings);
+    console.log(userMeetings);
 
     //upcommingMeetigs to be added
 
