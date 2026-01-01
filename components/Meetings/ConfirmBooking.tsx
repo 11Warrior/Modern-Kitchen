@@ -1,5 +1,4 @@
-// "use client"
-
+//"use client"
 import React, { useId } from 'react'
 import { Button } from '../ui/button'
 import { ChevronLeftIcon } from 'lucide-react'
@@ -22,25 +21,27 @@ type PropTypes = {
 const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTime, currStep }: PropTypes) => {
   const { user } = useUser();
   // console.log(user?.id);
-  const addMeetingMutation = useAddMeeting();
+  const addMeetingMutation  = useAddMeeting();
+  const BookedMeetingSet =  new Set();
 
   function handleBookingAction() {
     addMeetingMutation.mutate({
       chefId: chefId as string,
+      duration: bookingType.duration as number,
       date: bookingDate as string,
-      notes: "" as string,
+      notes: bookingType.description as string,
       time: bookingTime as string,
 
     },
       {
         onSuccess: (meeting) => {
           dispatch(resetBookingState());
-          dispatch(setBookedMeeting(meeting))
+          dispatch(setBookedMeeting(meeting));
         },
         onError: (error) => {
           console.log("Error adding new meeting", error?.message);
         }
-      }
+      },
     )
 
   }
@@ -116,7 +117,7 @@ const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTim
           Modify Meeting
         </Button>
 
-        <Button className='px-3 py-2 text-2xl rounded-[10px] text-black' onClick={() => handleBookingAction()}>
+        <Button className='px-3 py-2 text-2xl rounded-[10px] text-black' onClick={() => handleBookingAction()} disabled={addMeetingMutation.isPending} >
           Confirm Meeting
         </Button>
 

@@ -1,10 +1,11 @@
-//for get doctors and add doctors functionalities
+//for getting chefs and adding chefs functionalities
 "use server"
 
 import { Gender } from "@prisma/client";
 import { prisma } from "../prisma";
 import { generateProfile } from "../utils";
 import { revalidatePath } from "next/cache";
+import { MeetingTypeWithCount } from "@/components/Admin/ChefManagementPanel";
 
 type chefInputType = {
     name: string,
@@ -15,7 +16,7 @@ type chefInputType = {
     isActive: boolean,
 }
 
-export async function getChefs() {
+export async function getChefs(): Promise<MeetingTypeWithCount[]> {
     try {
         const chefs = await prisma.chef.findMany({
             include: {
@@ -31,6 +32,36 @@ export async function getChefs() {
 
     } catch (error: any) {
         throw new Error("Failed to get Chefs", error);
+    }
+}
+
+export async function getChefById(chefId: string) {
+    try {
+        const chef = await prisma.chef.findUnique({
+            where: {id: chefId}
+        })
+        return chef;
+    } catch (error : Error | any) {
+        throw new Error("Error getting chef by id", error)
+    }
+}
+
+export async function getAvailableChefs(){
+    try {
+        const chefs = await prisma.chef.findMany({
+            where: {isActive: true},
+            include: {
+                _count: { select: {meetings: true}}
+            },
+            orderBy: {createdAt: "desc"}
+        })
+
+        return chefs.map((chef) => ({
+            ...chef,
+            meetingCount: chef._count.meetings
+        }))
+    } catch (error:Error | any) {
+        throw new Error("Failed to get available chefs\n", error)
     }
 }
 
