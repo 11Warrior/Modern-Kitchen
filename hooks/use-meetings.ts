@@ -1,10 +1,9 @@
 "use client"
 
 import { getAvailableChefs } from "@/lib/actions/chefs";
-import {  getBookedMeetingTime, getMeetings, getMeetingStats, getUserMeetings } from "@/lib/actions/meetings";
+import { getBookedMeetingTime, getMeetingByChefId, getMeetings, getMeetingStats, getUserMeetings } from "@/lib/actions/meetings";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { error } from "console";
-import { json } from "stream/consumers";
+import { revalidateEntireCache } from "next/dist/client/components/segment-cache";
 
 
 export function useGetMeetings() {
@@ -42,6 +41,15 @@ export function useGetUserMeeting() {
   return result;
 }
 
+export function useGetMeetingByChefId(chefId: string) {
+  const result = useQuery({
+    queryKey: ["getMeetingById"],
+    queryFn: () => getMeetingByChefId(chefId)
+  })
+
+  return result;
+}
+
 export function useGetBookedMeetingTime(chefId: string, date: string) {
   const result = useQuery({
     queryKey: ["bookedMeetingTime"],
@@ -53,10 +61,11 @@ export function useGetBookedMeetingTime(chefId: string, date: string) {
 }
 
 export type MeetingInput = {
-    chefId: string,
-    date: string,
-    notes?: string,
-    time: string,
+  chefId: string,
+  date: string,
+  notes?: string,
+  duration: number,
+  time: string,
 }
 
 
@@ -72,9 +81,9 @@ export function useAddMeeting() {
             headers: { 'content-type': 'application/json' }
           }
         )
-        
+
         const addedMeeting = await res.json();
-        return  addedMeeting;
+        return addedMeeting;
 
       } catch (error: Error | any) {
         throw new Error("Error calling api/meetings for adding meeting", error?.messsage);
@@ -82,6 +91,7 @@ export function useAddMeeting() {
     },
     onSuccess: () => {
       console.log("Sucessfully created meeting");
+      revalidateEntireCache;
     },
     onError: (error) => {
       console.log("Error while calling meeting backend api", error?.message);

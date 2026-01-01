@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 
 import React, { Key, useState } from 'react'
 import { Card, CardContent, CardHeader } from '../ui/card'
@@ -7,7 +7,6 @@ import { Button } from '../ui/button'
 import Image from 'next/image'
 import { useAddChefs, useGetChefs, useUpdateChefs } from '@/hooks/use-chefs'
 import { Chef, Gender } from '@prisma/client'
-import { useGetMeetings } from '@/hooks/use-meetings'
 import {
     Dialog,
     DialogClose,
@@ -22,14 +21,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select'
 
+export type MeetingTypeWithCount = Chef & {
+    meetingCount: number
+}
 
 const ChefManagementPanel = () => {
-    const { data: chefs = [] } = useGetChefs();
-    const { data: meetings = [] } = useGetMeetings();
+    const { data : chefs = []  } = useGetChefs();
 
     const addChefMutation = useAddChefs();
     const updateChefMutation = useUpdateChefs();
-
 
     const [values, setValue] = useState({
         name: "",
@@ -40,11 +40,10 @@ const ChefManagementPanel = () => {
         isActive: true
     });
 
-
     const handleAdd = () => {
         addChefMutation.mutate(values);
-        console.log(addChefMutation);
-        console.log(values);
+        // console.log(addChefMutation);
+        // console.log(values);
         setValue({
             name: "",
             email: "",
@@ -57,8 +56,8 @@ const ChefManagementPanel = () => {
 
     const handleUpdate = () => {
         updateChefMutation.mutate(values);
-        console.log(updateChefMutation);
-        console.log(values);
+        // console.log(updateChefMutation);
+        // console.log(values);
 
         setValue({
             name: "",
@@ -203,7 +202,7 @@ const ChefManagementPanel = () => {
                         <div className='flex gap-5 items-center justify-center'>
                             <div className='flex flex-col justify-center'>
                                 {/**{chef.meetingCount} to be fixed later */}
-                                <h1 className='text-center text-2xl'>1</h1>
+                                <h1 className='text-center text-2xl'>{chef.meetingCount}</h1>
                                 <h1 className='text-2xl text-muted-foreground'>Meetings</h1>
                             </div>
 

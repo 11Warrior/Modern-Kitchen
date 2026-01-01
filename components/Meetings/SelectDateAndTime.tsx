@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useMemo } from 'react'
 import { Button } from '../ui/button'
 import { ChevronLeftIcon, ClockIcon } from 'lucide-react'
 import { BookingType, setBookingDate, setBookingTime, setBookingType, setCurrentStep } from '@/redux/features/BookChefs/BookChefsSlice'
@@ -18,8 +19,20 @@ type PropTypes = {
 const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, bookingTime, chefId }: PropTypes) => {
 
     const availableDates = availableMeetingDates();
-    const { data: bookedTimeSlots } = useGetBookedMeetingTime(chefId, bookingDate);
-    console.log(bookedTimeSlots);
+    const { data: bookedTimeSlots, isFetching } = useGetBookedMeetingTime(chefId, bookingDate);
+    console.log(bookedTimeSlots, isFetching);
+
+    const bookedTimeSlotSet = new Set(bookedTimeSlots || []);
+
+    const memoizedBookedTimeSlots = useMemo(() => {
+
+        return (
+            availableMeetingTimes.map((time) => ({
+                time,
+                isBooked: bookedTimeSlotSet.has(time)
+            })))
+    }, [bookedTimeSlots])
+
 
     return (
         <section className='space-y-6'>
@@ -42,6 +55,7 @@ const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, booki
                                 className={`cursor-pointer transition-all hover:shadow-sm ${bookingType.title === type.title ? "ring-2 ring-primary" : ""
                                     }`}
                                 onClick={() => dispatch(setBookingType(type))}
+                            // onChange={() => dispatch(setBookingDate(" "))}
                             >
                                 <CardContent className="py-2">
                                     <div className="flex justify-between items-center">
@@ -61,7 +75,7 @@ const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, booki
                 </div>
 
                 <div className='space-y-5'>
-                    <h1 className='text-3xl'>Appointment Type</h1>
+                    <h1 className='text-3xl'>Appointment Date</h1>
                     <div className='grid grid-cols-2 gap-3'>
 
                         {availableDates.map((date, index) => (
@@ -69,6 +83,10 @@ const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, booki
                                 key={index}
                                 variant={bookingDate === date.bookingDate ? "default" : "outline"}
                                 onClick={() => dispatch(setBookingDate(date.bookingDate))}
+                                // onChange={() => {
+                                //     dispatch(setBookingType())
+
+                                // }}
                                 className="h-12 p-3"
                             >
                                 <div className="text-center">
@@ -78,20 +96,23 @@ const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, booki
                                 </div>
                             </Button>
                         ))}
-
                     </div>
 
                     {bookingDate && (
                         <div className="space-y-3">
                             <h1 className="text-3xl">Available Times</h1>
                             <div className="grid grid-cols-3 gap-3">
-                                {availableMeetingTimes.map((time) => {
-                                    const isBooked = bookedTimeSlots?.includes(time);
+                                {memoizedBookedTimeSlots.map(({ time, isBooked }) => {
                                     return (
                                         <Button
                                             key={time}
                                             variant={bookingTime === time ? "default" : "outline"}
-                                            onClick={() => !isBooked && dispatch(setBookingTime(time))}
+                                            onClick={() => {
+                                                dispatch(setBookingTime(time))
+                                                bookedTimeSlotSet.add(time)
+
+                                            }
+                                            }
                                             size="lg"
                                             disabled={isBooked}
                                             className={isBooked ? "opacity-50 cursor-not-allowed" : ""}
@@ -112,7 +133,7 @@ const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, booki
             </div>
 
             <div className='flex justify-end'>
-                <Button className='text-3xl px-5 py-4 text-black rounded-md' onClick={() => dispatch(setCurrentStep(currStep + 1))}>
+                <Button className='text-3xl px-5 py-4 text-black rounded-md' onClick={() => dispatch(setCurrentStep(currStep + 1))} disabled={bookingDate === " "}>
                     Review Booking
                 </Button>
             </div>

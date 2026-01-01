@@ -1,12 +1,12 @@
 // lib/prisma.ts
 
 import { PrismaClient } from "@prisma/client";
-import { PrismaNeonHttp } from "@prisma/adapter-neon";
+import { PrismaNeon, PrismaNeonHttp } from "@prisma/adapter-neon";
 
 const connectionString = process.env.DATABASE_URL!;
 
 // CORRECT: pass the connection string, NOT neon(client)
-const adapter = new PrismaNeonHttp(connectionString, {});
+const adapter = new PrismaNeon({connectionString});
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;

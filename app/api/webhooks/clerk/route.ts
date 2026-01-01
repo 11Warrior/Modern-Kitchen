@@ -56,7 +56,7 @@ export async function POST(req: Request) {
   }
 
   if (event.type === "user.deleted") {
-    await prisma.client.delete({ where: { clerkId: id } });
+    await prisma.client.delete({ where: { clerkId: id, email  } });
   }
 
   return new Response("OK", { status: 200 }); // ❗ MUST RETURN 200

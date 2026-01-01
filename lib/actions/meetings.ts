@@ -2,6 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "../prisma";
+import { revalidatePath } from "next/cache";
 
 export async function getMeetings() {
     try {
@@ -25,13 +26,12 @@ export async function getMeetings() {
 export async function getUserMeetings() {
     try {
         const { userId } = await auth();
-
+        console.log(userId);
         const meetings = await prisma.meeting.findMany({
             where: { clientId: userId },
             include:
                 { chef: true, client: true }
             ,
-
             orderBy: [{ date: "asc" }, { time: "asc" }]
         })
 
@@ -45,6 +45,7 @@ export async function getMeetingStats() {
     try {
         const { userId } = await auth();
 
+
         const [totalMeetings, completedMeetings] = await Promise.all([
             prisma.meeting.count({ where: { clientId: userId } }),
             prisma.meeting.count({ where: { clientId: userId, status: 'COMPLETED' } })
@@ -53,5 +54,39 @@ export async function getMeetingStats() {
         return { totalMeetings, completedMeetings };
     } catch (error) {
         throw new Error("Error getting meeting stats");
+    }
+}
+
+export async function getBookedMeetingTime(chefId: string, date: string) {
+    try {
+        const bookedMeetings = await prisma.meeting.findMany({
+            where: {
+                chefId,
+                date: new Date(date),
+                status: {
+                    in: ["CONFIRMED", "COMPLETED"]
+                }
+            },
+            select: { time: true }
+        })
+
+        return bookedMeetings.map((meeting) => meeting.time)
+
+    } catch (error: Error | any) {
+        throw new Error("Error while getting booked meeting time", error)
+    }
+}
+
+
+export async function getMeetingByChefId(chefId: string) {
+    try {
+        const meetings = await prisma.meeting.findMany({
+            where: { chefId: chefId }
+        })
+        return  meetings;
+
+    } catch (error) {
+        console.error("Error while getting chef by id:", error)
+        throw error;
     }
 }
