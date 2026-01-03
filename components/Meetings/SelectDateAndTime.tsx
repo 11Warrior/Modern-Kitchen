@@ -20,12 +20,11 @@ const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, booki
 
     const availableDates = availableMeetingDates();
     const { data: bookedTimeSlots, isFetching } = useGetBookedMeetingTime(chefId, bookingDate);
-    console.log(bookedTimeSlots, isFetching);
+    // console.log(bookedTimeSlots, isFetching);
+
 
     const bookedTimeSlotSet = new Set(bookedTimeSlots || []);
-
     const memoizedBookedTimeSlots = useMemo(() => {
-
         return (
             availableMeetingTimes.map((time) => ({
                 time,

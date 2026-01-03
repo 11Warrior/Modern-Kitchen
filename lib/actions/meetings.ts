@@ -23,14 +23,12 @@ export async function getMeetings() {
     //to be added in admin page.
 }
 
-export async function getUserMeetings() {
+export async function getUserMeetings(userId: string) {
     try {
-        const { userId } = await auth();
-        console.log(userId);
         const meetings = await prisma.meeting.findMany({
             where: { clientId: userId },
             include:
-                { chef: true, client: true }
+                { chef: { select: { name: true, profileImage: true } } }
             ,
             orderBy: [{ date: "asc" }, { time: "asc" }]
         })
@@ -41,10 +39,8 @@ export async function getUserMeetings() {
     }
 }
 
-export async function getMeetingStats() {
+export async function getMeetingStats(userId: string) {
     try {
-        const { userId } = await auth();
-
 
         const [totalMeetings, completedMeetings] = await Promise.all([
             prisma.meeting.count({ where: { clientId: userId } }),
@@ -83,7 +79,7 @@ export async function getMeetingByChefId(chefId: string) {
         const meetings = await prisma.meeting.findMany({
             where: { chefId: chefId }
         })
-        return  meetings;
+        return meetings;
 
     } catch (error) {
         console.error("Error while getting chef by id:", error)

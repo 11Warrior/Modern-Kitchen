@@ -15,27 +15,30 @@ export function useGetMeetings() {
 }
 
 export function useGetAvailableChefs() {
+
   const result = useQuery({
     queryKey: ["availableChefs"],
     queryFn: getAvailableChefs,
+
   })
 
   return result;
 }
 
-export function useGetMeetingStats() {
+export function useGetMeetingStats(id:string) {
   const result = useQuery({
     queryKey: ["meetingStats"],
-    queryFn: getMeetingStats,
+    queryFn:() => getMeetingStats(id),
   })
 
   return result;
 }
 
-export function useGetUserMeeting() {
+export function useGetUserMeeting(id:string) {
   const result = useQuery({
     queryKey: ["userMeetings"],
-    queryFn: getUserMeetings,
+    queryFn:() => getUserMeetings(id),
+    refetchOnReconnect: false
   })
 
   return result;
@@ -70,6 +73,8 @@ export type MeetingInput = {
 
 
 export function useAddMeeting() {
+  const queryClient = useQueryClient();
+  
   const result = useMutation({
     mutationKey: ['addMeeting'],
     mutationFn: async (input: MeetingInput) => {
@@ -91,7 +96,8 @@ export function useAddMeeting() {
     },
     onSuccess: () => {
       console.log("Sucessfully created meeting");
-      revalidateEntireCache;
+      queryClient.invalidateQueries({queryKey:["availableChefs"]})
+      queryClient.invalidateQueries({queryKey:["bookedMeetingTime"]})
     },
     onError: (error) => {
       console.log("Error while calling meeting backend api", error?.message);
