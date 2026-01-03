@@ -27,34 +27,34 @@ const CallWidget = () => {
 
     useEffect(() => {
         function handleCallStart() {
-            console.log("Vapi Call Started");
+            // console.log("Vapi Call Started");
             setCallStarted(true);
             setConnecting(false);
         }
 
         function handleCallEnd() {
-            console.log("Vapi Call Ended");
+            // console.log("Vapi Call Ended");
             setCallStarted(false);
             setConnecting(false);
             setIsSpeaking(false);
         }
 
         function handleSpeechStarted() {
-            console.log("Vapi Speech Started");
+            // console.log("Vapi Speech Started");
             setIsSpeaking(true)
         }
 
         function handleSpeechEnd() {
-            console.log("Vapi Speech Ended");
+            // console.log("Vapi Speech Ended");
             setIsSpeaking(false)
         }
 
         function handleError() {
-            console.log("Vapi Error Received");
+            // console.log("Vapi Error Received");
         }
 
         function handleConnecting() {
-            console.log("Connecting...");
+            // console.log("Connecting...");
             setConnecting(true);
             setIsSpeaking(false);
             setCallStarted(false);
@@ -65,7 +65,7 @@ const CallWidget = () => {
                 const newMessage = { content: payload.transcript, role: payload.role };
                 setMessages((prev) => [...prev, newMessage]);
             }
-            console.log("Vapi Message Received:", payload);
+            // console.log("Vapi Message Received:", payload);
         }
 
         vapi.on("call-start", handleCallStart)

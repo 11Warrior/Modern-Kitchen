@@ -40,7 +40,6 @@ export async function POST(req: Request) {
             }
         })
 
-        revalidatePath('/admin/meetings')
 
         return Response.json(
             {

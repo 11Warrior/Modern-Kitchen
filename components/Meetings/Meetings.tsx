@@ -1,16 +1,23 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Steps from './Steps';
 import SelectChef from './SelectChef';
 import SelectDateAndTime from './SelectDateAndTime';
 import ConfirmBooking from './ConfirmBooking';
+import BookingConfirmationModal from './BookingConfirmationModal';
 
 const Meetings = () => {
   // const appointmentState = useSelector()
   //handle meeting confirmed modal here using useState rather than redux setup
-  const {currentStep, chefId, bookingType, bookingDate, bookingTime} = useSelector((state : any) => state.chefMeetings);
+  const { currentStep, chefId, bookingType, bookingDate, bookingTime, bookedMeeting } = useSelector((state: any) => state.chefMeetings);
   const dispatch = useDispatch();
+
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
+
+  // const handleToggleConfimationModalState = () => {
+  //   setConfirmationModal(!confirmationModal);
+  // }
 
   return (
     <section className='min-h-screen px-20 py-10 space-y-10'>
@@ -23,7 +30,7 @@ const Meetings = () => {
       <Steps currStep={currentStep} />
 
       {currentStep === 1 && (
-        <SelectChef currStep={currentStep} chefId={chefId} dispatch={dispatch}/>
+        <SelectChef currStep={currentStep} chefId={chefId} dispatch={dispatch} />
       )}
 
       {currentStep === 2 && (
@@ -31,8 +38,13 @@ const Meetings = () => {
       )}
 
       {currentStep === 3 && (
-        <ConfirmBooking chefId={chefId} dispatch={dispatch} bookingDate={bookingDate} bookingTime={bookingTime} bookingType={bookingType} currStep={currentStep} />
+        <ConfirmBooking modal={confirmationModal} toggleModal={setConfirmationModal}  chefId={chefId} dispatch={dispatch} bookingDate={bookingDate} bookingTime={bookingTime} bookingType={bookingType} currStep={currentStep} />
       )}
+
+      {( confirmationModal) && (
+        <BookingConfirmationModal modal={confirmationModal} toggleModal={setConfirmationModal} bookedMeeting={bookedMeeting} dispatch={dispatch}/>
+      )}
+
 
     </section>
   )

@@ -26,7 +26,7 @@ export type MeetingTypeWithCount = Chef & {
 }
 
 const ChefManagementPanel = () => {
-    const { data : chefs = []  } = useGetChefs();
+    const { data: chefs = [] } = useGetChefs();
 
     const addChefMutation = useAddChefs();
     const updateChefMutation = useUpdateChefs();
@@ -307,7 +307,6 @@ const ChefManagementPanel = () => {
             </Card>
 
             {/* <AddChefDialogueBox /> */}
-
         </section>
     )
 }

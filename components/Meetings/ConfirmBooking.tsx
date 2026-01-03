@@ -1,4 +1,4 @@
-//"use client"
+"use client"
 import React, { useId } from 'react'
 import { Button } from '../ui/button'
 import { ChevronLeftIcon } from 'lucide-react'
@@ -15,14 +15,16 @@ type PropTypes = {
   currStep: number,
   bookingType: BookingType,
   bookingDate: string,
-  bookingTime: string
+  bookingTime: string,
+  modal: boolean,
+  toggleModal: (modal: boolean) => void
 }
 
-const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTime, currStep }: PropTypes) => {
+const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTime, currStep, modal, toggleModal }: PropTypes) => {
   const { user } = useUser();
   // console.log(user?.id);
-  const addMeetingMutation  = useAddMeeting();
-  const BookedMeetingSet =  new Set();
+  const addMeetingMutation = useAddMeeting();
+  const BookedMeetingSet = new Set();
 
   function handleBookingAction() {
     addMeetingMutation.mutate({
@@ -34,9 +36,29 @@ const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTim
 
     },
       {
-        onSuccess: (meeting) => {
-          dispatch(resetBookingState());
+        onSuccess: async ({ data: meeting }) => {
           dispatch(setBookedMeeting(meeting));
+          // console.log("Inside the onSucess of handleBookingAction", meeting);
+
+          await fetch('/api/bookings/send-email', {
+            method: 'post',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              chefName: meeting?.chef?.name,
+              bookingType: bookingType?.title,
+              date: bookingDate,
+              time: meeting?.time,
+              duration: meeting?.duration,
+              location: "Modern Kitchen",
+              clientEmail: meeting?.client?.email,
+              service: meeting?.notes
+            },
+            )
+          })
+          toggleModal(true);
+
         },
         onError: (error) => {
           console.log("Error adding new meeting", error?.message);
@@ -118,7 +140,7 @@ const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTim
         </Button>
 
         <Button className='px-3 py-2 text-2xl rounded-[10px] text-black' onClick={() => handleBookingAction()} disabled={addMeetingMutation.isPending} >
-          Confirm Meeting
+          {addMeetingMutation.isPending ? 'Booking...' : 'Confirm Meeting'}
         </Button>
 
       </div>
