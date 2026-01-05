@@ -25,7 +25,7 @@ const AppointmentsStats = () => {
         const currentDateTime = new Date();
         const upcommingMeetingDateTime = new Date(meeting.date);
         // console.log(upcommingMeetingDateTime);
-        return upcommingMeetingDateTime >= currentDateTime;
+        return upcommingMeetingDateTime >= currentDateTime && meeting.status === "CONFIRMED";
     });
 
     let rightNextMeeting = nextMeetings?.[0]

@@ -1,10 +1,8 @@
 "use client"
 
 import { getAvailableChefs } from "@/lib/actions/chefs";
-import { getBookedMeetingTime, getMeetingByChefId, getMeetings, getMeetingStats, getUserMeetings } from "@/lib/actions/meetings";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { revalidateEntireCache } from "next/dist/client/components/segment-cache";
-
+import { changeMeetingStatus, getBookedMeetingTime, getMeetingByChefId, getMeetings, getMeetingStats, getUserMeetings } from "@/lib/actions/meetings";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useGetMeetings() {
   const result = useQuery({
@@ -25,20 +23,24 @@ export function useGetAvailableChefs() {
   return result;
 }
 
-export function useGetMeetingStats(id:string) {
+export function useGetMeetingStats(id: string) {
   const result = useQuery({
     queryKey: ["meetingStats"],
-    queryFn:() => getMeetingStats(id),
+    queryFn: () => getMeetingStats(id),
   })
 
   return result;
 }
 
-export function useGetUserMeeting(id:string) {
+export function useGetUserMeeting(id: string) {
   const result = useQuery({
     queryKey: ["userMeetings"],
-    queryFn:() => getUserMeetings(id),
-    refetchOnReconnect: false
+    queryFn: () => getUserMeetings(id),
+    // refetchOnReconnect: false
+    refetchOnMount: false,
+    staleTime: 60_000,
+    placeholderData: keepPreviousData
+
   })
 
   return result;
@@ -71,10 +73,9 @@ export type MeetingInput = {
   time: string,
 }
 
-
 export function useAddMeeting() {
   const queryClient = useQueryClient();
-  
+
   const result = useMutation({
     mutationKey: ['addMeeting'],
     mutationFn: async (input: MeetingInput) => {
@@ -96,13 +97,28 @@ export function useAddMeeting() {
     },
     onSuccess: () => {
       console.log("Sucessfully created meeting");
-      queryClient.invalidateQueries({queryKey:["availableChefs"]})
-      queryClient.invalidateQueries({queryKey:["bookedMeetingTime"]})
+      queryClient.invalidateQueries({ queryKey: ["availableChefs"] })
+      queryClient.invalidateQueries({ queryKey: ["bookedMeetingTime"] })
+      queryClient.invalidateQueries({ queryKey: ["userMeetings"] })
+      queryClient.invalidateQueries({ queryKey: ["meetingStats"] })
     },
     onError: (error) => {
       console.log("Error while calling meeting backend api", error?.message);
     }
   })
 
+  return result;
+}
+
+export function useChangeStatus() {
+  const queryClient = useQueryClient();
+
+  const result = useMutation({
+    mutationFn: changeMeetingStatus,
+    onSuccess: () => {
+      console.log("Status Changed")
+      queryClient.invalidateQueries({ queryKey: ["userMeetings"] })
+    }
+  })
   return result;
 }

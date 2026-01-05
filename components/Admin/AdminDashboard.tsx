@@ -8,6 +8,7 @@ import { useUser } from '@clerk/nextjs'
 import { CogIcon } from 'lucide-react'
 import AdminStatus from './AdminStatus'
 import ChefManagementPanel from './ChefManagementPanel'
+import RecentAppointments from './RecentAppointments'
 
 
 
@@ -15,7 +16,7 @@ const AdminDashboard = () => {
   const { data: chefs = [], isLoading: isChefLoading, isPending: isChefPending } = useGetChefs();
   const { data: meetings = [], isLoading: isMeetingLoading, isPending: isMeetingPending } = useGetMeetings();
 
-  // console.log(chefs, meetings);
+  // console.log(chefs, typeof (meetings));
 
 
   const admin = useUser();
@@ -39,7 +40,7 @@ const AdminDashboard = () => {
       <Navbar />
 
       <div className='w-full px-20 py-10 h-[40vh] overflow-hidden'>
-        <div className='bg-primary/60 rounded-lg w-full h-full px-5 py-10 flex items-center justify-between'>
+        <div className='w-full h-[30vh] flex justify-between bg-linear-to-br from-primary/90 to-primary/10 rounded-lg p-7'>
           <div className='flex flex-col space-y-4'>
             <div className='text-accent-foreground rounded-full bg-amber-400/10 p-3 flex gap-2 items-center w-[10vw]  '>
               <div className='size-2 bg-amber-700 rounded-full animate-pulse'>
@@ -56,8 +57,8 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className='size-40 rounded-full bg-amber-950 flex items-center justify-center'>
-            <CogIcon size={100} />
+          <div className='size-46 p-8 rounded-full  flex items-center bg-primary/40  justify-center border border-black'>
+            <CogIcon size={"100%"} color='#7033ff' />
           </div>
         </div>
       </div>
@@ -78,6 +79,9 @@ const AdminDashboard = () => {
       </div>
 
       {/**Meeting records in dashboard to be done */}
+      {meetings.length > 0 && (
+        <RecentAppointments meetings={meetings} />
+      )}
 
     </section>
   )

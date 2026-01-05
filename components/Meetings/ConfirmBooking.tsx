@@ -58,14 +58,12 @@ const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTim
             )
           })
           toggleModal(true);
-
         },
         onError: (error) => {
           console.log("Error adding new meeting", error?.message);
         }
       },
     )
-
   }
 
   const { data: bookedChef } = useGetChefById(chefId);
@@ -140,7 +138,11 @@ const ConfirmBooking = ({ chefId, dispatch, bookingType, bookingDate, bookingTim
         </Button>
 
         <Button className='px-3 py-2 text-2xl rounded-[10px] text-black' onClick={() => handleBookingAction()} disabled={addMeetingMutation.isPending} >
-          {addMeetingMutation.isPending ? 'Booking...' : 'Confirm Meeting'}
+          {addMeetingMutation.isPending ?
+            'Booking...'
+            : addMeetingMutation.isSuccess
+              ? "Booked"
+              : 'Confirm Meeting'}
         </Button>
 
       </div>

@@ -16,7 +16,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between items-center h-full">
         {/* LOGO */}
         <div className="flex items-center gap-8">
-          <Link href="/admin/dashboard" className="flex items-center gap-2">
+          <Link href="/admin" className="flex items-center gap-2">
             <Image src="/logo.png" alt="DentWise Logo" width={32} height={32} className="w-11" />
           </Link>
 

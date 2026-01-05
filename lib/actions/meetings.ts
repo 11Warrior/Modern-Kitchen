@@ -28,7 +28,7 @@ export async function getUserMeetings(userId: string) {
         const meetings = await prisma.meeting.findMany({
             where: { clientId: userId },
             include:
-                { chef: { select: { name: true, profileImage: true } } }
+                { chef: { select: { name: true, profileImage: true, speciality: true } } }
             ,
             orderBy: [{ date: "asc" }, { time: "asc" }]
         })
@@ -84,5 +84,26 @@ export async function getMeetingByChefId(chefId: string) {
     } catch (error) {
         console.error("Error while getting chef by id:", error)
         throw error;
+    }
+}
+
+type statusUpdationInput = {
+    meetingId: string,
+    statusToUpdateTo: string
+}
+
+export async function changeMeetingStatus(input: statusUpdationInput) {
+    try {
+        const updatedMeeting = await prisma.meeting.update({
+            where: { id: input.meetingId },
+            data: {
+                status: input.statusToUpdateTo
+            }
+        })
+
+        return updatedMeeting;
+    } catch (error) {
+        console.log("Error changing state:", error)
+        throw error
     }
 }
