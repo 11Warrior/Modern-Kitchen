@@ -33,7 +33,7 @@ export function StatusBadgeComponent(status: string) {
 }
 
 const RecentAppointments = ({ meetings }: any) => {
-    console.log(meetings);
+    // console.log(meetings);
 
     const changeStatusMutation = useChangeStatus();
 

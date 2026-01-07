@@ -25,7 +25,7 @@ const BookingConfirmationModal = ({ modal, toggleModal, bookedMeeting, dispatch 
     const { user } = useUser();
     const userEmail = user?.emailAddresses?.[0]?.emailAddress;
 
-    console.log(bookedMeeting);
+    // console.log(bookedMeeting);
     const appointmentDate = new Date(bookedMeeting?.date)
 
     return (

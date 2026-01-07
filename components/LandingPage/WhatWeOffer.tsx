@@ -11,7 +11,7 @@ import { Button } from '../ui/button';
 
 const WhatWeOffer = () => {
     return (
-        <section className='w-full  bg-[#CFCEFF]'>
+        <section className='w-full  bg-[#CFCEFF]' id='learnMore'>
             <div className='text-center  text-black relative'>
                 <motion.div className='flex rotate-180'>
                     <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: "100%" }}>

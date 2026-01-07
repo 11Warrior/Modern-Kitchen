@@ -192,16 +192,39 @@ body {
 }
 
 @layer utilities {
+
   .no-spinner::-webkit-inner-spin-button,
   .no-spinner::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  .no-spinner{
+  .no-spinner {
     -moz-appearance: textfield;
   }
 }
+
+.parallax {
+  will-change: transform;
+}
+
+/* .custom-scrollbar::-webkit-scrollbar {
+  width: 50px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: chartreuse;
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar {
+  scrollbar-width: 50px;
+  scrollbar-color: chartreuse transparent;
+} */
 
 .card {
   position: absolute;
@@ -209,7 +232,7 @@ body {
   will-change: transform;
 }
 
-.background-golden{
+.background-golden {
   background: url('/glitterbg.jpg');
   background-clip: text;
   color: transparent;

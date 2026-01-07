@@ -20,7 +20,6 @@ const Voice = async () => {
       <>
         <Navbar />
         <section className='min-h-screen px-20 py-10 space-y-10'>
-
           <div className='w-full h-[30vh] bg-linear-to-br from-primary/90 to-primary/10 rounded-lg p-7'>
             <div className='h-full  flex justify-between'>
               <div className='  flex flex-col space-y-5'>
