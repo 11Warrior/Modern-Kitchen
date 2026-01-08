@@ -127,7 +127,7 @@ const CallWidget = () => {
 
                 <Card className='w-[90%]  justify-center items-center'>
                     <div className='size-50 rounded-full bg-linear-to-br from-primary/90 to-primary/10 flex items-center justify-center  outline-2 outline-primary overflow-hidden'>
-                        {isLoaded && (
+                        {isLoaded && user?.imageUrl && (
                             <Image src={user?.imageUrl} alt='logo' width={100} height={100} className='w-full h-full object-contain' />
                         )}
                     </div>
