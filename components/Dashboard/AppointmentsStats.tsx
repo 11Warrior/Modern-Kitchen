@@ -23,7 +23,7 @@ const AppointmentsStats = () => {
     // console.log(meetingStats);
 
     const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(userId);
-    console.log(userMeetings);
+    // console.log(userMeetings);
 
     if (!user) {
         return null;

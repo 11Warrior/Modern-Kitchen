@@ -19,7 +19,16 @@ type PropTypes = {
 const SelectChef = ({ dispatch, currStep, chefId }: PropTypes) => {
     const { data, isLoading } = useGetAvailableChefs();
     const { user } = useUser();
-    const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(user?.id);
+
+     const userId = user?.id;
+
+    const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(userId);
+
+
+    if (!user) {
+        return null;
+    }
+
     const nextThreeMeetings = useMemo(() => {
         if (!userMeetings?.length) return [];
 
