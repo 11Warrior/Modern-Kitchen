@@ -173,7 +173,7 @@ const ChefManagementPanel = () => {
                 </ CardHeader>
 
                 {/* <hr className='decoration-1' /> */}
-                {chefs.map((chef: Chef, key: Key) => (
+                {chefs.map((chef: MeetingTypeWithCount, key: Key) => (
                     <div className='flex justify-between py-5 px-10 bg-zinc-700/30 ' key={key}>
                         <div className='flex gap-5 '>
                             <img src={chef.profileImage} alt='chef1-image' className='rounded-full' width={100} height={100} loading='lazy' />

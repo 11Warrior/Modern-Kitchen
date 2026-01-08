@@ -65,7 +65,7 @@ const SelectChef = ({ dispatch, currStep, chefId }: PropTypes) => {
                                                 <span className="font-medium">5</span>
                                             </div>
                                             <span className="text-muted-foreground">
-                                                ({chef.meetingCount} appointments)
+                                                ({chef._count.meetings} appointments)
                                             </span>
                                         </div>
                                     </CardDescription>
