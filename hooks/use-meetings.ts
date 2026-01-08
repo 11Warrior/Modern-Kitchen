@@ -26,9 +26,9 @@ export function useGetAvailableChefs() {
 
 export function useGetMeetingStats(id: string) {
   const result = useQuery({
-    queryKey: ["meetingStats"],
+    queryKey: ["meetingStats", id],
     queryFn: () => getMeetingStats(id),
-    // enabled: !!id
+    enabled: !!id
   })
 
   return result;
@@ -36,13 +36,13 @@ export function useGetMeetingStats(id: string) {
 
 export function useGetUserMeeting(id: string) {
   const result = useQuery({
-    queryKey: ["userMeetings"],
+    queryKey: ["userMeetings", id],
     queryFn: () => getUserMeetings(id),
     // refetchOnReconnect: false
     refetchOnMount: "always",
     staleTime: 30_000,
     // placeholderData: keepPreviousData,
-    // enabled: !!id
+    enabled: !!id
 
   })
 

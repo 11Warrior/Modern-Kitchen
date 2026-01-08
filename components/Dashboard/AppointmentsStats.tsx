@@ -14,7 +14,8 @@ const AppointmentsStats = () => {
     const memberSince = user?.createdAt?.toString().split(' ');
     // console.log(memberSince)
 
-    const userId = user?.id as string;
+    const userId = user?.id ?? "";
+
 
     // console.log(userId)
 
@@ -22,7 +23,8 @@ const AppointmentsStats = () => {
     // console.log(meetingStats);
 
     const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(userId);
-
+    console.log(userMeetings);
+    
     if (!user) {
         return null;
     }
@@ -30,7 +32,7 @@ const AppointmentsStats = () => {
     const nextMeetings = userMeetings?.filter((meeting) => {
         const currentDateTime = new Date();
         const upcommingMeetingDateTime = new Date(meeting.date);
-        // console.log(upcommingMeetingDateTime);
+        console.log(upcommingMeetingDateTime);
         return upcommingMeetingDateTime >= currentDateTime && meeting.status === "CONFIRMED";
     });
 

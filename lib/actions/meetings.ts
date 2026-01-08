@@ -25,8 +25,12 @@ export async function getMeetings() {
 
 export async function getUserMeetings(userId: string) {
     try {
+        const client = await prisma.client.findUnique({
+            where: { clerkId: userId }
+        })
+
         const meetings = await prisma.meeting.findMany({
-            where: { clientId: userId },
+            where: { clientId: client?.id },
             include:
                 { chef: { select: { name: true, profileImage: true, speciality: true } } }
             ,
@@ -41,10 +45,13 @@ export async function getUserMeetings(userId: string) {
 
 export async function getMeetingStats(userId: string) {
     try {
+        const client = await prisma.client.findUnique({
+            where: { clerkId: userId },
+        });
 
         const [totalMeetings, completedMeetings] = await Promise.all([
-            prisma.meeting.count({ where: { clientId: userId } }),
-            prisma.meeting.count({ where: { clientId: userId, status: 'COMPLETED' } })
+            prisma.meeting.count({ where: { clientId: client?.id } }),
+            prisma.meeting.count({ where: { clientId: client?.id, status: 'COMPLETED' } })
         ])
 
         return { totalMeetings, completedMeetings };
