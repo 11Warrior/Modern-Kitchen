@@ -13,7 +13,9 @@ export async function POST(req: Request) {
     try {
         const { userId } = await auth();
         // console.log(userId);
-
+        if (!userId) {
+            return new Response("Unauthorized", { status: 401 });
+        }
         const user = await prisma.client.findUnique({ where: { clerkId: userId } })
 
         // console.log(user);
