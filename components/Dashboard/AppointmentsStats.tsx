@@ -11,7 +11,7 @@ import { useGetMeetingStats, useGetUserMeeting } from '@/hooks/use-meetings'
 const AppointmentsStats = () => {
     const { user } = useUser();
     // console.log(user);
-    const memberSince = user?.createdAt.toString().split(' ');
+    const memberSince = user?.createdAt?.toString().split(' ');
     // console.log(memberSince)
 
     const { data: meetingStats, isFetchedAfterMount: statsFetched } = useGetMeetingStats(user?.id);
