@@ -13,13 +13,19 @@ const AppointmentsStats = () => {
     // console.log(user);
     const memberSince = user?.createdAt?.toString().split(' ');
     // console.log(memberSince)
+
+    const userId = user?.id as string;
+
+    // console.log(userId)
+
+    const { data: meetingStats, isFetchedAfterMount: statsFetched } = useGetMeetingStats(userId);
+    // console.log(meetingStats);
+
+    const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(userId);
+
     if (!user) {
         return null;
     }
-    const { data: meetingStats, isFetchedAfterMount: statsFetched } = useGetMeetingStats(user?.id);
-    // console.log(meetingStats);
-
-    const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(user?.id);
 
     const nextMeetings = userMeetings?.filter((meeting) => {
         const currentDateTime = new Date();

@@ -8,6 +8,7 @@ export function useGetMeetings() {
   const result = useQuery({
     queryKey: ["getMeetings"],
     queryFn: getMeetings,
+
   })
   return result;
 }
@@ -27,6 +28,7 @@ export function useGetMeetingStats(id: string) {
   const result = useQuery({
     queryKey: ["meetingStats"],
     queryFn: () => getMeetingStats(id),
+    // enabled: !!id
   })
 
   return result;
@@ -38,8 +40,9 @@ export function useGetUserMeeting(id: string) {
     queryFn: () => getUserMeetings(id),
     // refetchOnReconnect: false
     refetchOnMount: "always",
-    staleTime: 60_000,
-    placeholderData: keepPreviousData
+    staleTime: 30_000,
+    // placeholderData: keepPreviousData,
+    // enabled: !!id
 
   })
 
