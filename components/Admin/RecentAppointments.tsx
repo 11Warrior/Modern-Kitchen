@@ -53,9 +53,7 @@ const RecentAppointments = ({ meetings }: any) => {
                     console.error(error);
                 }
             })
-
     }
-
 
     return (
         <section className=' px-20 py-10'>

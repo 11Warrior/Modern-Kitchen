@@ -41,7 +41,7 @@ const Pro = async () => {
           </div>
 
           <div className='mt-20'>
-            <PricingTable appearance={{ variables: { colorBackground: 'white' } }} newSubscriptionRedirectUrl='/admin/pro' />
+            <PricingTable  appearance={{ variables: { colorBackground: 'white' } }} newSubscriptionRedirectUrl='/admin/pro'  />
           </div>
         </div>
 

@@ -1,12 +1,11 @@
 "use client"
-import React, { useId } from 'react'
+import React from 'react'
 import { Button } from '../ui/button'
 import { ChevronLeftIcon } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '../ui/card'
 import { useGetChefById } from '@/hooks/use-chefs'
-import { BookingType, resetBookingState, setBookedMeeting, setCurrentStep } from '@/redux/features/BookChefs/BookChefsSlice'
+import { BookingType, setBookedMeeting, setCurrentStep } from '@/redux/features/BookChefs/BookChefsSlice'
 import { useAddMeeting } from '@/hooks/use-meetings'
-import { currentUser } from '@clerk/nextjs/server'
 import { useUser } from '@clerk/nextjs'
 
 type PropTypes = {

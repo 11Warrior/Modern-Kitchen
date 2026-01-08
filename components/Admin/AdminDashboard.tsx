@@ -9,6 +9,7 @@ import { CogIcon } from 'lucide-react'
 import AdminStatus from './AdminStatus'
 import ChefManagementPanel from './ChefManagementPanel'
 import RecentAppointments from './RecentAppointments'
+import Image from 'next/image'
 
 
 
@@ -20,11 +21,11 @@ const AdminDashboard = () => {
 
 
   const admin = useUser();
-  let user;
+  // let user;
 
-  useEffect(() => {
-    user = admin.user;
-  }, [admin.user])
+  // useEffect(() => {
+  //   user = admin.user;
+  // }, [admin.user])
 
 
   const stats = {
@@ -36,29 +37,37 @@ const AdminDashboard = () => {
 
   return (
     <section className='w-full min-h-screen'>
-      {!admin.user && (<LoadingUI />)}
+      {!admin.user && isChefLoading && isChefPending && isMeetingLoading && isMeetingPending && (<LoadingUI />)}
       <Navbar />
 
       <div className='w-full px-20 py-10 h-[40vh] overflow-hidden'>
-        <div className='w-full h-[30vh] flex justify-between bg-linear-to-br from-primary/90 to-primary/10 rounded-lg p-7'>
-          <div className='flex flex-col space-y-4'>
-            <div className='text-accent-foreground rounded-full bg-amber-400/10 p-3 flex gap-2 items-center w-[10vw]  '>
-              <div className='size-2 bg-amber-700 rounded-full animate-pulse'>
+        <div className='w-full h-[30vh] bg-linear-to-br from-primary/90 to-primary/10 rounded-lg p-7'>
+          <div className='h-full  flex justify-between'>
+            <div className='  flex flex-col space-y-5'>
+              <div className='w-[9vw] h-[3vh] bg-background rounded-full flex gap-3 items-center px-4 outline-2 outline-primary'>
+                <div className='size-2  animate-pulse bg-accent-foreground rounded-full' />
+                <p className='text-white'>
+                  View and Verify
+                </p>
               </div>
-              <span className='text-[1vw]'>Admin Dashboard</span>
+              <div className='space-y-2 text-white'>
+                <h1 className='text-6xl' >
+                  Good {new Date().getHours() < 12
+                    ? "Morning"
+                    : new Date().getHours() < 18 ?
+                      "Afternoon" : "Evening"
+                  }, {admin?.user?.fullName}
+                </h1>
+                <p className='text-4xl text-background/50'>Admin Dashboard to add chefs and manage your meetings.</p>
+              </div>
             </div>
 
-            <div>
-              <h1 className='text-5xl'>Welcome Back ! {admin?.user?.fullName}</h1>
+            <div className=' right flex items-center justify-end'>
+              <div className=' size-46 p-2 rounded-full  flex items-center bg-linear-to-br from-primary/90 to-primary/10 justify-center outline-2 outline-primary'>
+                <Image src={'/logo.png'} height={200} width={200} alt='' />
+              </div>
             </div>
 
-            <div>
-              <p className='text-2xl'>Manage your chefs, meetings and monitor the performance of chefs</p>
-            </div>
-          </div>
-
-          <div className='size-46 p-8 rounded-full  flex items-center bg-primary/40  justify-center border border-black'>
-            <CogIcon size={"100%"} color='#7033ff' />
           </div>
         </div>
       </div>
@@ -90,7 +99,7 @@ const AdminDashboard = () => {
 export default AdminDashboard
 
 export const LoadingUI = () => {
-  return <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background z-99 ">
     <Navbar />
     <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
       <div className="flex items-center justify-center h-96">

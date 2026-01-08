@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className="px-6 py-12 border-t bg-muted/30">
+    <footer className="px-6 py-12 border-t bg-muted/30 text-xl">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
@@ -13,9 +13,9 @@ const Footer = () => {
                 alt="ModernKitchen Logo"
                 width={32}
                 height={32}
-                className="w-8 h-8"
+                className="w-10 h-10 bg-linear-to-br from-primary/90 to-primary/10 flex items-center justify-center  outline-2 outline-primary rounded-full"
               />
-              <span className="font-semibold text-lg">Modern Kitchen</span>
+              <span className="font-semibold text-lg"> <span className=' text-primary'>Modern </span> Kitchen</span>
             </div>
             <p className="text-sm text-muted-foreground">
               AI-powered cooking assistance that actually helps.

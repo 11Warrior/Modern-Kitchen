@@ -6,12 +6,15 @@ import React from 'react'
 
 const Dashboard = async () => {
   const user = await currentUser();
+  // console.log(user);
   const adminUserEmail = process.env.ADMIN_EMAIL;
 
   const isAdmin = user?.emailAddresses?.[0].emailAddress === adminUserEmail;
-  if (!isAdmin) {
+  // console.log(isAdmin)
+  if (!isAdmin || !user) {
     redirect("/");
   }
+
   return (
     <section>
       <AdminDashboard />

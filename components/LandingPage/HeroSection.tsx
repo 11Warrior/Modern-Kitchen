@@ -4,8 +4,10 @@ import { Button } from '../ui/button';
 import { ArrowBigDown, ArrowDown } from 'lucide-react';
 import { easeIn, easeInOut, motion } from 'framer-motion';
 import Link from 'next/link';
+import { SignUpButton, useUser } from '@clerk/nextjs';
 
 const HeroSection = () => {
+    const { isSignedIn } = useUser();
 
     return (
         <section >
@@ -35,9 +37,18 @@ const HeroSection = () => {
                     <p className='text-[3vw] text-center'>Welcome to the future of cooking <span className='text-white/40'> guided by AI and real chefs.</span>
                     </p>
                     <div className='flex gap-2'>
-                        <Link href={'/admin/voice'}>
-                            <Button variant='destructive' className='text-[1.2vw] ' >Get Recipe</Button>
-                        </Link>
+                        {isSignedIn ? (
+                            <Link href={'/admin/voice'}>
+                                <Button variant='destructive' className='text-[1.2vw] ' >Get Recipe</Button>
+                            </Link>
+                        ) : (
+                            <SignUpButton mode='modal'>
+                                <Link href={''}>
+                                    <Button variant='destructive' className='text-[1.2vw] ' >Get Recipe</Button>
+                                </Link>
+                            </SignUpButton>
+                        )}
+
                         <Link href={'/#learnMore'}>
                             <Button variant='outline' className='text-[1.2vw]'>Learn More</Button>
                         </Link>

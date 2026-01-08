@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 function Navbar() {
   const { user } = useUser();
   const pathname = usePathname();
-  
+
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-2 border-b border-border/50 bg-background/80 backdrop-blur-md h-16">
@@ -17,17 +17,18 @@ function Navbar() {
         {/* LOGO */}
         <div className="flex items-center gap-8">
           <Link href="/admin" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="DentWise Logo" width={32} height={32} className="w-11" />
+            <div className='size-8 overflow-hidden rounded-full bg-linear-to-br from-primary/90 to-primary/10 flex items-center justify-center outline-2 outline-primary'>
+              <Image src={'/logo.png'} alt='logo' width={500} height={500} className='size-full' />
+            </div>
           </Link>
 
           <div className="flex items-center gap-6">
             <Link
               href="/admin/dashboard"
-              className={`flex items-center gap-2 transition-colors ${
-                pathname === "/admin/dashboard"
+              className={`flex items-center gap-2 transition-colors ${pathname === "/admin/dashboard"
                   ? "text-foreground hover:text-primary font-medium"
                   : "text-muted-foreground hover:text-foreground"
-              }`}
+                }`}
             >
               <HomeIcon className="w-4 h-4" />
               <span className="hidden md:inline">Dashboard</span>
@@ -35,9 +36,8 @@ function Navbar() {
 
             <Link
               href="/admin/meetings"
-              className={`flex items-center gap-2 transition-colors hover:text-foreground ${
-                pathname === "/admin/meetings" ? "text-foreground" : "text-muted-foreground"
-              }`}
+              className={`flex items-center gap-2 transition-colors hover:text-foreground ${pathname === "/admin/meetings" ? "text-foreground" : "text-muted-foreground"
+                }`}
             >
               <CalendarIcon className="w-4 h-4" />
               <span className="hidden md:inline">Meetings</span>
@@ -45,18 +45,16 @@ function Navbar() {
 
             <Link
               href="/admin/voice"
-              className={`flex items-center gap-2 transition-colors hover:text-foreground ${
-                pathname === "/admin/voice" ? "text-foreground" : "text-muted-foreground"
-              }`}
+              className={`flex items-center gap-2 transition-colors hover:text-foreground ${pathname === "/admin/voice" ? "text-foreground" : "text-muted-foreground"
+                }`}
             >
               <MicIcon className="w-4 h-4" />
               <span className="hidden md:inline">Voice</span>
             </Link>
             <Link
               href="/admin/pro"
-              className={`flex items-center gap-2 transition-colors hover:text-foreground ${
-                pathname === "/admin/pro" ? "text-foreground" : "text-muted-foreground"
-              }`}
+              className={`flex items-center gap-2 transition-colors hover:text-foreground ${pathname === "/admin/pro" ? "text-foreground" : "text-muted-foreground"
+                }`}
             >
               <CrownIcon className="w-4 h-4" />
               <span className="hidden md:inline">Pro</span>

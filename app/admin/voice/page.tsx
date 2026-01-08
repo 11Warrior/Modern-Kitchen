@@ -2,7 +2,7 @@ import FeatureLocked from '@/components/ProPage/FeatureLocked';
 import CallWidget from '@/components/VoicePage/CallWidget';
 import Navbar from '@/components/Navbar/Navbar'
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { auth, currentUser } from '@clerk/nextjs/server'
+import { auth } from '@clerk/nextjs/server'
 import { Calendar, MicIcon, Shield } from 'lucide-react';
 import React from 'react'
 
@@ -12,7 +12,6 @@ const Voice = async () => {
   const proPlans = has({ plan: 'ai_basic' }) || has({ plan: 'ai_pro' });
   if (!proPlans) return <FeatureLocked />
 
-  const user = await currentUser();
 
   // console.log(user)
 

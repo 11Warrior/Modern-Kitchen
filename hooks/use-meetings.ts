@@ -17,7 +17,7 @@ export function useGetAvailableChefs() {
   const result = useQuery({
     queryKey: ["availableChefs"],
     queryFn: getAvailableChefs,
-
+    refetchOnMount: "always"
   })
 
   return result;
@@ -37,7 +37,7 @@ export function useGetUserMeeting(id: string) {
     queryKey: ["userMeetings"],
     queryFn: () => getUserMeetings(id),
     // refetchOnReconnect: false
-    refetchOnMount: false,
+    refetchOnMount: "always",
     staleTime: 60_000,
     placeholderData: keepPreviousData
 
@@ -118,6 +118,7 @@ export function useChangeStatus() {
     onSuccess: () => {
       console.log("Status Changed")
       queryClient.invalidateQueries({ queryKey: ["userMeetings"] })
+      // queryClient.refetchQueries({ queryKey: ["userMeetings"] })
     }
   })
   return result;

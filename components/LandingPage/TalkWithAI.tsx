@@ -10,7 +10,7 @@ const TalkWithAI = () => {
   const { isSignedIn } = useUser();
 
   return (
-    <section className='w-full  px-20 py-10' id='explore'>
+    <section className='w-full  px-20 py-10 ' id='explore'>
 
       <h1 className='text-[6vw] '>Start <span className='text-primary'> Exploring</span></h1>
       <div className='w-full flex justify-between items-center'>
@@ -26,7 +26,7 @@ const TalkWithAI = () => {
               </div>
             </div>
             <div>
-              <h1 className='text-[3vw] text-muted-foreground'>journey with <span className='text-primary'>Modern Kitchen</span></h1>
+              <h1 className='text-[3vw] text-muted-foreground'>journey with <span className='text-primary'>  &#123;  Modern</span> Kitchen &#125;</h1>
             </div>
           </div>
 
@@ -57,10 +57,16 @@ const TalkWithAI = () => {
 
         </div>
 
-        <div className='w-[45vw] h-[30vw] overflow-hidden rounded-full bg-linear-to-br from-primary/90 to-primary/10 flex items-center justify-center  outline-2 outline-primary hover:shadow-5xl hover:shadow-amber-400'>
-          <Link href={'/admin/voice'}>
-            <Image src={'/logo.png'} alt='logo' width={500} height={500} className='w-full h-full' />
-          </Link>
+        <div className='w-[45vw] h-[30vw] overflow-hidden rounded-full bg-linear-to-br from-primary/90 to-primary/10 flex items-center justify-center  outline-2 outline-primary hover:shadow-5xl hover:shadow-amber-400 cursor-pointer mb-25'>
+          {isSignedIn  ? (
+            <Link href={'/admin/voice'}>
+              <Image src={'/logo.png'} alt='logo' width={500} height={500} className='w-full h-full' />
+            </Link>
+          ) :
+            <SignUpButton mode='modal'>
+              <Image src={'/logo.png'} alt='logo' width={500} height={500} className='w-full h-full' />
+            </SignUpButton>
+          }
         </div>
       </div>
     </section>

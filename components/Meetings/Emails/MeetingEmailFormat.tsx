@@ -28,7 +28,7 @@ const MeetingEmailFormat = ({
             <div style={styles.header}>
                 <h1 style={styles.logo}>
                     <img src={'http://localhost:3000/_next/image?url=%2Flogo.png&w=64&q=75'} width={200} height={200} alt=" " />
-                    Modern Kitchen
+                    <span className="text-primary">Modern</span> Kitchen
                 </h1>
             </div>
 

@@ -6,8 +6,6 @@ import { Brain, Calendar, Clock, MessageSquareIcon, UserIcon } from 'lucide-reac
 import { Button } from '../ui/button'
 import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
-import { getMeetingStats } from '@/lib/actions/meetings'
-import { currentUser } from '@clerk/nextjs/server'
 import { useGetMeetingStats, useGetUserMeeting } from '@/hooks/use-meetings'
 
 const AppointmentsStats = () => {

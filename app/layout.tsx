@@ -4,14 +4,8 @@ import "./globals.css";
 
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
 } from '@clerk/nextjs'
 import Navbar from "@/components/LandingPage/Navbar";
-import { Variable } from "lucide-react";
 import SmoothScroll from "@/components/LenisComponent/SmoothScroll";
 import TanStackProvider from "./TanStackProvider";
 import { ReduxProvider } from "@/redux/ReduxProvider";
@@ -36,7 +30,7 @@ export const metadata: Metadata = {
   description: "Listens for voice prompts and generated the recipe for user.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
