@@ -13,7 +13,9 @@ const AppointmentsStats = () => {
     // console.log(user);
     const memberSince = user?.createdAt?.toString().split(' ');
     // console.log(memberSince)
-
+    if (!user) {
+        return null;
+    }
     const { data: meetingStats, isFetchedAfterMount: statsFetched } = useGetMeetingStats(user?.id);
     // console.log(meetingStats);
 
