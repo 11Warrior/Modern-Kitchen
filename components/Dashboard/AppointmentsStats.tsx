@@ -14,7 +14,7 @@ const AppointmentsStats = () => {
     const memberSince = user?.createdAt?.toString().split(' ');
     // console.log(memberSince)
 
-    const userId = user?.id ?? "";
+    const userId = user?.id;
 
 
     // console.log(userId)
@@ -24,7 +24,7 @@ const AppointmentsStats = () => {
 
     const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(userId);
     console.log(userMeetings);
-    
+
     if (!user) {
         return null;
     }

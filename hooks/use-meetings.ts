@@ -24,20 +24,20 @@ export function useGetAvailableChefs() {
   return result;
 }
 
-export function useGetMeetingStats(id: string) {
+export function useGetMeetingStats(id?: string) {
   const result = useQuery({
     queryKey: ["meetingStats", id],
-    queryFn: () => getMeetingStats(id),
+    queryFn: () => getMeetingStats(id!),
     enabled: !!id
   })
 
   return result;
 }
 
-export function useGetUserMeeting(id: string) {
+export function useGetUserMeeting(id?: string) {
   const result = useQuery({
     queryKey: ["userMeetings", id],
-    queryFn: () => getUserMeetings(id),
+    queryFn: () => getUserMeetings(id!),
     // refetchOnReconnect: false
     refetchOnMount: "always",
     staleTime: 30_000,
