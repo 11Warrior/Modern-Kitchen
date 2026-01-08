@@ -25,7 +25,9 @@ const SelectChef = ({ dispatch, currStep, chefId }: PropTypes) => {
     const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(userId);
 
 
+
     if (!user) {
+        
         return null;
     }
 
