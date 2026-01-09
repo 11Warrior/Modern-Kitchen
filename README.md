@@ -10,7 +10,8 @@
 
 > ModernKitchen AI to help you cook difficult recipes on voice call and guide you to purchase suitable plan to book meetings with experienced chefs to dive deeply in cooking.
 
-### ✨ [Demo](https://modern-kitchen.vercel.app/)
+### ✨ Live Link
+[VISIT](https://modern-kitchen.vercel.app/)
 
 ## Install
 
