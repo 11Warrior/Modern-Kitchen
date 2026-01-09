@@ -37,11 +37,4 @@ npm test
 * Website: https://www.linkedin.com/in/thapaaayush/
 * Twitter: [@11Warrior.dev](https://twitter.com/11Warrior.dev)
 * Github: [@11Warrior](https://github.com/11Warrior)
-* LinkedIn: [@Aayush Thapa](https://linkedin.com/in/Aayush Thapa)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+* LinkedIn: [@Aayush Thapa](https://www.linkedin.com/in/thapaaayush/))
