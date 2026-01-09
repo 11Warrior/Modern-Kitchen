@@ -20,16 +20,13 @@ const SelectChef = ({ dispatch, currStep, chefId }: PropTypes) => {
     const { data, isLoading } = useGetAvailableChefs();
     const { user } = useUser();
 
-     const userId = user?.id;
+    const userId = user?.id;
 
     const { data: userMeetings, isFetchedAfterMount: userMeetingsFetched } = useGetUserMeeting(userId);
 
 
 
-    if (!user) {
-        
-        return null;
-    }
+
 
     const nextThreeMeetings = useMemo(() => {
         if (!userMeetings?.length) return [];
@@ -44,8 +41,12 @@ const SelectChef = ({ dispatch, currStep, chefId }: PropTypes) => {
                 return meetingDateTime >= now;
             })
             .slice(0, 3);
-    }, [userMeetingsFetched  ]);
+    }, [userMeetingsFetched]);
+    
+    if (!user) {
 
+        return null;
+    }
 
     return (
         <>

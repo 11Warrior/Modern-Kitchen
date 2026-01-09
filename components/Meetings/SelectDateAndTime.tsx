@@ -24,6 +24,7 @@ const SelectDateAndTime = ({ dispatch, currStep, bookingType, bookingDate, booki
 
 
     const bookedTimeSlotSet = new Set(bookedTimeSlots || []);
+   
     const memoizedBookedTimeSlots = useMemo(() => {
         return (
             availableMeetingTimes.map((time) => ({
