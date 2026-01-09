@@ -91,6 +91,7 @@ const BookingConfirmationModal = ({ modal, toggleModal, bookedMeeting, dispatch 
                 </div>
                 <Link href={'/admin/dashboard'} >
                     <Button onClick={() => {
+                        dispatch(resetBookingState())
                     }} variant={'default'} className='w-full text-2xl rounded-2xl text-black'>
                         View my appointments
                     </Button>

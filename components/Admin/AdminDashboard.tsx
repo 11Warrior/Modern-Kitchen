@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     totalChefs: chefs.length,
     activeChefs: (chefs.filter((chef) => chef.isActive)).length,
     totalMeetings: meetings.length,
-    completedMeetings: (meetings.filter((meeting) => meeting.status === "CONFIRMED")).length
+    completedMeetings: (meetings.filter((meeting) => meeting.status === "COMPLETED")).length
   }
 
   return (
