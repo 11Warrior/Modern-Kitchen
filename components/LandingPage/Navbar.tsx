@@ -41,7 +41,7 @@ const Navbar = () => {
                             </a>
                         </SignUpButton>
                     ) : (
-                        <a href="/admin" className='text-muted-foreground hover:text-primary cursor-pointer'>
+                        <a href="/admin/dashboard" className='text-muted-foreground hover:text-primary cursor-pointer'>
                             Dashboard
                         </a>
                     )}
