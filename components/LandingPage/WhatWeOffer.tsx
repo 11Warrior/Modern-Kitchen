@@ -26,9 +26,9 @@ const WhatWeOffer = () => {
             </div>
 
             <div className='cards relative  w-full min-h-[80vh] flex items-center justify-center '>
-                <div className='flex gap-[13vw]  '>
+                <div className='flex gap-[13vw] perspective-distant '>
 
-                    <motion.div initial={{ y: 0 }} animate={{ y: [0, 40, 0] }} transition={{ duration: 3, ease: easeInOut, repeat: Infinity }} className='w-[20vw] h-[50vh] flex flex-col space-y-4 bg-chart-3/75 -rotate-40 translate-y-10 rounded-lg py-4 px-2 cursor-pointer'>
+                    <motion.div initial={{ y: 0 }} animate={{ y: [0, 40, 0] }} transition={{ duration: 3, ease: easeInOut, repeat: Infinity }} className='w-[20vw] h-[50vh] flex flex-col space-y-4  bg-linear-to-bl from-primary via-primary/70  -rotate-40  translate-y-10 rounded-lg py-4 px-2 cursor-pointer border border-muted-foreground/20 '>
                         <div className='flex items-center flex-col space-y-3'>
                             <MicIcon color='#7033ff' width={70} height={70} className='bg-secondary/10  rounded-lg  p-2' />
                             <h1 className='font-semibold text-3xl tracking-wider'>Ask Anything</h1>
@@ -37,14 +37,14 @@ const WhatWeOffer = () => {
                             Chat with our AI culinary assistant about any recipe idea, ingredient substitution, or cooking technique. Get instant answers and professional tips for any dish.
                         </p>
                         <div className='flex gap-3 items-center justify-center'>
-                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1 h-1 rounded-full bg-[#4ac885]'></div><h1 className='text-primary'>24/7 Availability</h1></div>
-                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1 h-1 rounded-full bg-[#4ac885]'></div><h1 className='text-primary'>Instant Recipe Help</h1></div>
+                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse'></div><h1 className=''>24/7 Availability</h1></div>
+                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse'></div><h1 className=''>Instant Recipe Help</h1></div>
 
                         </div>
 
                     </motion.div>
 
-                    <motion.div initial={{ y: 0 }} animate={{ y: [0, 40, 0] }} transition={{ duration: 3, ease: easeInOut, repeat: Infinity }} className='w-[20vw] h-[50vh] flex flex-col space-y-4 bg-primary/75  -translate-y-40 rounded-lg py-4 px-2 cursor-pointer'>
+                    <motion.div initial={{ y: 0 }} animate={{ y: [0, 40, 0] }} transition={{ duration: 3, ease: easeInOut, repeat: Infinity }} className='w-[20vw] h-[50vh] flex flex-col space-y-4 bg-primary/70  -translate-y-40 rounded-lg py-4 px-2 cursor-pointer border border-muted-foreground/20'>
                         <div className='flex items-center flex-col space-y-3'>
                             <BrainIcon color='#4ac885' width={70} height={70} className='bg-secondary/10  rounded-lg  p-2' />
                             <h1 className='font-semibold text-3xl tracking-wider'>Get Expert Advise</h1>
@@ -53,13 +53,13 @@ const WhatWeOffer = () => {
                             Receive personalized recipe recommendations based on your pantry, dietary needs, and flavor preferences. Our AI provides thousands of tested, high-quality recipe insights.
                         </p>
                         <div className='flex gap-3 items-center justify-center'>
-                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1 h-1 rounded-full bg-chart-3'></div><h1 className='text-[#4ac885]'>AI Powered</h1></div>
-                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1 h-1 rounded-full bg-chart-3'></div><h1 className='text-[#4ac885]'>Personalized Plans</h1></div>
+                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse'></div><h1 className=''>AI Powered</h1></div>
+                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse'></div><h1 className=''>Personalized Plans</h1></div>
 
                         </div>
                     </motion.div>
 
-                    <motion.div initial={{ y: 0 }} animate={{ y: [0, 40, 0] }} transition={{ duration: 3, ease: easeInOut, repeat: Infinity }} className='w-[20vw] h-[50vh] flex flex-col space-y-4 bg-chart-1/75  rotate-40 translate-y-10 rounded-lg py-4 px-2 cursor-pointer'>
+                    <motion.div initial={{ y: 0 }} animate={{ y: [0, 40, 0] }} transition={{ duration: 3, ease: easeInOut, repeat: Infinity }} className='w-[20vw] h-[50vh] flex flex-col space-y-4 bg-linear-to-br from-primary via-primary/70  rotate-40 translate-y-10 rounded-lg py-4 px-2 cursor-pointer border border-muted-foreground/20'>
                         <div className='flex items-center flex-col space-y-3'>
                             <Calendar1Icon color='#fd822b' width={70} height={70} className='bg-secondary/10  rounded-lg  p-2' />
                             <h1 className='font-semibold text-3xl tracking-wider'>Cook And Create</h1>
@@ -68,8 +68,8 @@ const WhatWeOffer = () => {
                             Schedule and save your favorite recipes generated by the chatbot. Track your progress, meal prep effortlessly, and share your culinary successes seamlessly.
                         </p>
                         <div className='flex gap-3 items-center justify-center'>
-                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1 h-1 rounded-full bg-primary'></div><h1 className='text-[#fd822b]'>Verified Recipes</h1></div>
-                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1 h-1 rounded-full bg-primary'></div><h1 className='text-[#fd822b]'>Seamless Meal Tracking</h1></div>
+                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse'></div><h1 className=''>Verified Recipes</h1></div>
+                            <div className='rounded-lg bg-white/10 p-2 flex gap-2 items-center'><div className='w-1.5 h-1.5 rounded-full bg-primary animate-pulse'></div><h1 className=''>Seamless Meal Tracking</h1></div>
 
                         </div>
                     </motion.div>

@@ -17,7 +17,7 @@ const HeroSection = () => {
                     lineThickness={1}
                     linesColor="#392e4e"
                     gridScale={0.1}
-                    scanColor="#FF9FFC"
+                    scanColor="#7033ff"
                     scanOpacity={0.4}
                     scanGlow={0.5}
                     enablePost
