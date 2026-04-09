@@ -169,7 +169,7 @@ const CallWidget = () => {
                             {!callStarted && (
                                 <div className="message-item animate-in fade-in duration-300">
                                     <div className="font-semibold text-xs text-primary mb-1">System:</div>
-                                    <p className="text-foreground">Call ended. Thank you for using DentWise AI!</p>
+                                    <p className="text-foreground">Call ended. Thank you for using ModernKitchen AI!</p>
                                 </div>
                             )}
                         </div>
