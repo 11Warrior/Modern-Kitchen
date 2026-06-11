@@ -10,7 +10,8 @@ const Dashboard = async () => {
 
   const isAdmin = user?.emailAddresses?.[0].emailAddress === adminUserEmail;
   // console.log(isAdmin)
-  if (!isAdmin || !user) {
+
+ if (!isAdmin || !user) {
     redirect("/");
   }
 

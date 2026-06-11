@@ -23,17 +23,14 @@ export async function POST(req: Request) {
                 })
             }
         )
-
         if (error) {
             console.log("Error sending confirmation email: ", error)
         }
-
-
+        
         return Response.json(
             { data: email },
             { status: 200 },
         )
-
     } catch (error) {
         console.error("Error sending email", error)
         throw error;

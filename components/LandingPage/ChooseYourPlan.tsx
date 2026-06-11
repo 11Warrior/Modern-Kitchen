@@ -142,13 +142,13 @@ const ChooseYourPlan = () => {
                                 {!isSignedIn ? (
                                     <SignUpButton mode="modal">
                                         <Button className="w-full mb-8 py-3 bg-linear-to-r from-muted to-muted/80 text-foreground rounded-xl font-semibold">
-                                            Upgrade to AI Basic
+                                            Upgrade to AI Pro
                                         </Button>
                                     </SignUpButton>
                                 ) : (
                                     <Link href={'/admin/pro'}>
                                         <Button className="w-full py-3 mb-8 bg-linear-to-r from-muted to-muted/80 text-foreground rounded-xl font-semibold">
-                                            Upgrade to AI Basic
+                                            Upgrade to AI Pro
                                         </Button>
                                     </Link>
                                 )}

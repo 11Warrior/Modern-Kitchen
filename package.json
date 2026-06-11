@@ -69,6 +69,7 @@
     "react-resizable-panels": "^3.0.6",
     "recharts": "^2.15.4",
     "resend": "^6.6.0",
+    "savr-cli": "^1.0.2",
     "sonner": "^2.0.7",
     "svix": "^1.81.0",
     "tailwind-merge": "^3.3.1",
